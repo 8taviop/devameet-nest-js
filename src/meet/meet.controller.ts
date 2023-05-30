@@ -15,6 +15,7 @@ export class MeetController {
         const { userId } = req?.user;
 
         const result = await this.service.getMeetsByUser(userId);
+        console.log(result);
 
         return result.map(m => ({
             id: m._id.toString(),
@@ -22,6 +23,13 @@ export class MeetController {
             color: m.color,
             link: m.link
         }) as GetMeetDto);
+    }
+
+    @Get(":id")
+    async getMeetById(@Request() req, @Param() params){
+        const { userId } = req?.user
+        const { id } = params
+        return await this.service.getMeetById(id, userId);
     }
 
     @Post()
