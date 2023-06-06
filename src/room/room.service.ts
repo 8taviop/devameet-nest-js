@@ -11,7 +11,6 @@ import { Position, PositionDocument } from './schemas/position.schema';
 
 @Injectable()
 export class RoomService {
-
     private logger = new Logger(RoomService.name);
 
     constructor(
@@ -19,7 +18,6 @@ export class RoomService {
         @InjectModel(MeetObject.name) private readonly objectModel : Model<MeetObjectDocument>,
         @InjectModel(Position.name) private readonly positionModel : Model<PositionDocument>,
         private readonly userService: UserService
-        
     ){}
 
     async getRoom(link: string){
@@ -48,7 +46,7 @@ export class RoomService {
         return await this.positionModel.deleteMany({clientId});
     }
 
-    async UpdateUserPosition(clientId:string ,dto : UpdateUserPositionDto){
+    async updateUserPosition(clientId:string ,dto : UpdateUserPositionDto){
             this.logger.debug(`listUsersPositionByLink - ${dto.link}`);
 
             const meet = await this._getMeet(dto.link);
